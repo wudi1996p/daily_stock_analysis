@@ -58,26 +58,28 @@ jobs:
       
       - name: 执行股票分析
         env:
-        # 1. 启用AI深度分析（关键配置）
-      API_KEY: ${{ secrets.API_KEY }}
-      BASE_URL: ${{ secrets.BASE_URL }}
-      MODEL_NAME: ${{ secrets.MODEL_NAME }}
-      FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
-      # 2. 指定要显示的核心指标（你关注的bull/KDJ/MACD/资金流向/行业对比）
-      ANALYSIS_INDICATORS: 'bull,KDJ,MACD,资金流向,行业对比'
-      # 3. AI分析指令（强制输出你要的指标解读+具体操作建议）
-       AI_PROMPT: |
-        针对每只股票，必须结合以下指标深度分析：
-        1. bull（多空趋势）：判断当前是多头/空头/震荡趋势
-        2. KDJ：分析超买/超卖状态，给出交叉信号解读
-        3. MACD：分析金叉/死叉、背离情况
-        4. 资金流向：解读主力资金流入/流出、北向资金动向
-        5. 行业对比：对比个股与行业指数的涨跌、走势差异
-        最终输出：
-        - 核心结论（买/卖/持有/观望）
-        - 各指标具体解读
-        - 止损/止盈价位参考
-        - 行业竞争优势/风险点
+       API_KEY: ${{ secrets.API_KEY }}
+  BASE_URL: ${{ secrets.BASE_URL }}
+  MODEL_NAME: ${{ secrets.MODEL_NAME }}
+  FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+
+  STOCK_LIST: "002460,601899,600309,600089,002812"
+
+  ANALYSIS_INDICATORS: "bull,KDJ,MACD,资金流向,行业对比"
+
+  AI_PROMPT: |
+    请对股票进行技术分析，重点关注以下指标：
+
+    1. bull：判断多头/空头趋势
+    2. KDJ：超买超卖与交叉信号
+    3. MACD：金叉死叉、背离
+    4. 资金流向：主力资金变化
+    5. 行业对比：个股 vs 行业指数
+
+    输出：
+    - 核心结论（买/卖/持有/观察）
+    - 指标解读
+    - 风险提示
           # ==========================================
           # AI 配置
           # ==========================================
